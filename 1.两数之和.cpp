@@ -44,17 +44,14 @@ public:
         unordered_map<int, int> indices;
         for (int i = 0; i < nums.size(); i++)
         {
+            auto t = indices.find(target - nums[i]);
+            // 因为恰好有两个数可以构成，check第一个数不成，check第二个数的时候一定成
+            if (t != indices.end())
+            {
+                return {t->second, i};
+            }
             indices[nums[i]] = i;
         }
-        for (int i = 0; i < nums.size(); i++)
-        {
-            auto t = indices.find(target - nums[i]);
-            if (t != indices.end() && t->second != i)
-            {
-                return {i, t->second};
-            }
-        }
-        // return vector<int>();
         throw runtime_error("no such pair");
     }
 };

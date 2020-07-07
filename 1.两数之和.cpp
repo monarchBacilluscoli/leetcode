@@ -31,6 +31,7 @@
 
 #include <vector>
 #include <stdexcept>
+#include <unordered_map>
 
 using namespace std;
 
@@ -40,14 +41,17 @@ class Solution
 public:
     vector<int> twoSum(vector<int> &nums, int target)
     {
-        for (int i = 0; i < nums.size() - 1; i++)
+        unordered_map<int, int> indices;
+        for (int i = 0; i < nums.size(); i++)
         {
-            for (int j = i + 1; j < nums.size(); j++)
+            indices[nums[i]] = i;
+        }
+        for (int i = 0; i < nums.size(); i++)
+        {
+            auto t = indices.find(target - nums[i]);
+            if (t != indices.end() && t->second != i)
             {
-                if (nums[i] + nums[j] == target)
-                {
-                    return vector<int>({i, j});
-                }
+                return {i, t->second};
             }
         }
         // return vector<int>();

@@ -18,11 +18,11 @@ public:
             return "";
         }
         string max_string = "";
-        for (int i = 0; i < s.size(); i++)
+        for (int i = 0; i < s.size(); ++i)
         {
             // from a char
             int current_length = 1;
-            for (int j = 1;; j++)
+            for (int j = 1;; ++j)
             {
                 if (i + j < s.size() && i - j >= 0 && s[i + j] == s[i - j])
                 {
@@ -39,7 +39,7 @@ public:
             }
             // between two chars
             current_length = 0;
-            for (int j = 0;; j++)
+            for (int j = 0;; ++j)
             {
                 if (i + 1 + j < s.size() && i - j >= 0 && s[i + 1 + j] == s[i - j])
                 {
